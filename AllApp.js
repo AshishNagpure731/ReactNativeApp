@@ -5,6 +5,7 @@ import UserAuth from "./src/Component/UserAuth";
 import AddNewUser from "./src/Component/AddNewUser";
 import AllProduct from "./src/Component/AllProducts";
 import AddProduct from "./src/Component/AddProduct";
+import Drawer from "./src/Component/Drawer";
 
 const Stack = createStackNavigator();
 
@@ -21,10 +22,16 @@ const Stack = createStackNavigator();
 export default function AllApp() {
   return (
     <NavigationContainer>
+      
       <Stack.Navigator initialRouteName="UserAuth">
+        <Stack.Screen 
+          name="MainDrawer" 
+          component={Drawer} 
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="UserAuth" component={UserAuth} />
         <Stack.Screen name="AddNewUser" component={AddNewUser} />
-        <Stack.Screen name="AllProduct" component={AllProduct} />
+        {/* <Stack.Screen name="AllProduct" component={AllProduct} /> */}
         <Stack.Screen name="AddProduct" component={AddProduct} />
       </Stack.Navigator>
     </NavigationContainer>

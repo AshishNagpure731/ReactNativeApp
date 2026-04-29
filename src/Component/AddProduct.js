@@ -1,7 +1,7 @@
 import { View, Text, Image, Button } from "react-native";
 import React, { useLayoutEffect, useRef, useState } from "react";
 import {
-  DrawerLayoutAndroid,
+  // DrawerLayoutAndroid,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -68,16 +68,17 @@ const AddProduct = ({ navigation }) => {
     drawer.current.closeDrawer();
   };
   return (
-    <DrawerLayoutAndroid
-      ref={drawer}
-      drawerWidth={300}
-      drawerPosition="right"
-      renderNavigationView={() => (
-        // viewDrawer
-        <DrawerView onClose={closeDrawer} />
-      )}
-      style={{ marginTop: 60 }}
-    >
+    // <DrawerLayoutAndroid
+    //   ref={drawer}
+    //   drawerWidth={300}
+    //   drawerPosition="right"
+    //   renderNavigationView={() => (
+    //     // viewDrawer
+    //     <DrawerView onClose={closeDrawer} />
+    //   )}
+    //   style={{ marginTop: 60 }}
+    // >
+    <>
       <View
         style={{
           height: 40,
@@ -177,7 +178,7 @@ const AddProduct = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </DrawerLayoutAndroid>
+      </>
   );
 };
 

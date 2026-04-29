@@ -24,19 +24,19 @@ export const getUserAuthCall = createSlice({
     token: [],
     isLoading: false,
   },
-  extraReducers: {
-    [callUserAuthApi.pending]: (state) => {
+  extraReducers:(builder)=> {
+   builder.addCase(callUserAuthApi.pending, (state) => {
       state.isLoading = true;
-    },
-    [callUserAuthApi.fulfilled]: (state, action) => {
+    })
+    .addCase(callUserAuthApi.fulfilled, (state, action) => {
       state.isLoading = false;
       state.token = action.payload;
-    },
-    [callUserAuthApi.rejected]: (state, action) => {
+    })
+    .addCase(callUserAuthApi.rejected, (state, action) => {
       state.isLoading = true;
       state.token = action.payload;
-    },
-  },
+    })
+  }
 });
 
 export const CallGetAllProductApi = createAsyncThunk(
@@ -78,17 +78,17 @@ export const getAllProducts = createSlice({
     data: [],
     isLoading: false,
   },
-  extraReducers: {
-    [CallGetAllProductApi.pending]: (state) => {
+  extraReducers: (builder)=> {
+    builder.addCase(CallGetAllProductApi.pending, (state) => {
       state.isLoading = true;
-    },
-    [CallGetAllProductApi.fulfilled]: (state, action) => {
+    }).addCase
+    (CallGetAllProductApi.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
-    },
-    [CallGetAllProductApi.rejected]: (state, action) => {
+    }).addCase
+    (CallGetAllProductApi.rejected, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
-    },
+    })
   },
 });

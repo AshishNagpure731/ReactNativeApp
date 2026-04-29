@@ -74,7 +74,7 @@ export default function UserAuth({ navigation }) {
             login();
             data === undefined
               ? alert("Incorrect Username Or Password")
-              : navigation.navigate("AllProduct");
+              : navigation.navigate("MainDrawer");
           }}
         />
         <Text>
