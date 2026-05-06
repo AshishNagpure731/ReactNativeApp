@@ -31,8 +31,8 @@ export default function AllApp() {
         />
         <Stack.Screen name="UserAuth" component={UserAuth} />
         <Stack.Screen name="AddNewUser" component={AddNewUser} />
-        {/* <Stack.Screen name="AllProduct" component={AllProduct} /> */}
-        <Stack.Screen name="AddProduct" component={AddProduct} />
+        <Stack.Screen name="AllProduct" component={AllProduct} />
+        <Stack.Screen options={{ headerShown: true }} name="AddProduct" component={AddProduct} />
       </Stack.Navigator>
     </NavigationContainer>
   );

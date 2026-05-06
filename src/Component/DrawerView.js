@@ -3,27 +3,30 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CallGetAllProductApi } from "../fetures/AllApiCall";
 
-const DrawerView = ({  navigation }) => { //onClose,
+const DrawerView = ({ navigation }) => {
+  //onClose,
   const dispatch = useDispatch();
   const [category, setCategory] = useState("");
   const handleCloseDrawer = (e) => {
     // onClose(Category);
     //onClose(e);
-    console.log(category,"clgggg" )
-    if (category === "Men Clothing") {
-      console.log("men Clothing")
-          dispatch(CallGetAllProductApi("/category/men's clothing"));
-        } else if (category === "Women Clothing") {
-          dispatch(CallGetAllProductApi("/category/women's clothing"));
-        } else if (category === "Electronics") {
-          dispatch(CallGetAllProductApi("/category/electronics"));
-        } else if (category === "Jewelery") {
-          dispatch(CallGetAllProductApi("/category/jewelery"));
-        } else if (category === "All Product") {
-          dispatch(CallGetAllProductApi());
-        } else if (category === "Add Product") {
-          navigation.openDrawer();
-        }
+    console.log(e);
+    if (e === "Men Clothing") {
+      console.log("men Clothing");
+      dispatch(CallGetAllProductApi("/category/men's clothing"));
+    } else if (e === "Women Clothing") {
+      dispatch(CallGetAllProductApi("/category/women's clothing"));
+    } else if (e === "Electronics") {
+      dispatch(CallGetAllProductApi("/category/electronics"));
+    } else if (e === "Jewelery") {
+      console.log(e);
+      dispatch(CallGetAllProductApi("/category/jewelery"));
+    } else if (e === "All Product") {
+      console.log(e);
+      dispatch(CallGetAllProductApi());
+    } else if (e === "Add Product") {
+      navigation.openDrawer();
+    }
   };
 
   return (
@@ -43,9 +46,10 @@ const DrawerView = ({  navigation }) => { //onClose,
       <View style={{ display: "flex", flexDirection: "column" }}>
         <TouchableOpacity
           onPress={() => {
-
+            setCategory("All Product");
+            handleCloseDrawer("All Product");
             navigation.navigate("AllProduct");
-  navigation.closeDrawer();
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -61,10 +65,10 @@ const DrawerView = ({  navigation }) => { //onClose,
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-                       setCategory("Men Clothing");
-            handleCloseDrawer("Men Clothing")
+            setCategory("Men Clothing");
+            handleCloseDrawer("Men Clothing");
             navigation.navigate("AllProduct");
-  navigation.closeDrawer();
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -81,9 +85,9 @@ const DrawerView = ({  navigation }) => { //onClose,
         <TouchableOpacity
           onPress={() => {
             setCategory("Women Clothing");
-            handleCloseDrawer()
+            handleCloseDrawer("Women Clothing");
             navigation.navigate("AllProduct");
-  navigation.closeDrawer();
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -100,9 +104,9 @@ const DrawerView = ({  navigation }) => { //onClose,
         <TouchableOpacity
           onPress={() => {
             setCategory("Jewelery");
-            handleCloseDrawer()
+            handleCloseDrawer("Jewelery");
             navigation.navigate("AllProduct");
-  navigation.closeDrawer();
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -119,9 +123,9 @@ const DrawerView = ({  navigation }) => { //onClose,
         <TouchableOpacity
           onPress={() => {
             setCategory("Electronics");
-            handleCloseDrawer()
+            handleCloseDrawer("Electronics");
             navigation.navigate("AllProduct");
-  navigation.closeDrawer();
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -138,9 +142,8 @@ const DrawerView = ({  navigation }) => { //onClose,
 
         <TouchableOpacity
           onPress={() => {
-
             navigation.getParent().navigate("AddProduct");
-  navigation.closeDrawer();
+            navigation.closeDrawer();
           }}
         >
           <Text
