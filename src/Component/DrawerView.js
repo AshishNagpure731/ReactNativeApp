@@ -1,18 +1,39 @@
 import { View, Text, Button, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CallGetAllProductApi } from "../fetures/AllApiCall";
 
-const DrawerView = ({ onClose, navigation }) => {
-  const [Category, setCategory] = useState("");
+const DrawerView = ({ navigation }) => {
+  //onClose,
+  const dispatch = useDispatch();
+  const [category, setCategory] = useState("");
   const handleCloseDrawer = (e) => {
     // onClose(Category);
-    onClose(e);
+    //onClose(e);
+    console.log(e);
+    if (e === "Men Clothing") {
+      console.log("men Clothing");
+      dispatch(CallGetAllProductApi("/category/men's clothing"));
+    } else if (e === "Women Clothing") {
+      dispatch(CallGetAllProductApi("/category/women's clothing"));
+    } else if (e === "Electronics") {
+      dispatch(CallGetAllProductApi("/category/electronics"));
+    } else if (e === "Jewelery") {
+      console.log(e);
+      dispatch(CallGetAllProductApi("/category/jewelery"));
+    } else if (e === "All Product") {
+      console.log(e);
+      dispatch(CallGetAllProductApi());
+    } else if (e === "Add Product") {
+      navigation.openDrawer();
+    }
   };
 
   return (
     <View style={{ flex: 1, alignItems: "center", marginTop: 60 }}>
       <TouchableOpacity
         style={{ alignSelf: "flex-end", marginRight: 15 }}
-        onPress={handleCloseDrawer}
+        onPress={() => navigation.closeDrawer()}
       >
         <Image
           source={require("../../assets/close.png")}
@@ -25,8 +46,10 @@ const DrawerView = ({ onClose, navigation }) => {
       <View style={{ display: "flex", flexDirection: "column" }}>
         <TouchableOpacity
           onPress={() => {
-            // setCategory("Men Clothing");
+            setCategory("All Product");
             handleCloseDrawer("All Product");
+            navigation.navigate("AllProduct");
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -42,8 +65,10 @@ const DrawerView = ({ onClose, navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            // setCategory("Men Clothing");
+            setCategory("Men Clothing");
             handleCloseDrawer("Men Clothing");
+            navigation.navigate("AllProduct");
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -59,8 +84,10 @@ const DrawerView = ({ onClose, navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            // setCategory("Women Clothing");
+            setCategory("Women Clothing");
             handleCloseDrawer("Women Clothing");
+            navigation.navigate("AllProduct");
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -76,8 +103,10 @@ const DrawerView = ({ onClose, navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            // setCategory("Jewelery");
+            setCategory("Jewelery");
             handleCloseDrawer("Jewelery");
+            navigation.navigate("AllProduct");
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -93,8 +122,10 @@ const DrawerView = ({ onClose, navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            // setCategory("Electronics");
+            setCategory("Electronics");
             handleCloseDrawer("Electronics");
+            navigation.navigate("AllProduct");
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -111,8 +142,8 @@ const DrawerView = ({ onClose, navigation }) => {
 
         <TouchableOpacity
           onPress={() => {
-            // setCategory("Electronics");
-            handleCloseDrawer("Add Product");
+            navigation.getParent().navigate("AddProduct");
+            navigation.closeDrawer();
           }}
         >
           <Text
@@ -127,7 +158,7 @@ const DrawerView = ({ onClose, navigation }) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ marginTop: 15 }}>
-          <Button title="close" onPress={handleCloseDrawer} />
+          <Button title="close" onPress={() => navigation.closeDrawer()} />
         </TouchableOpacity>
       </View>
     </View>

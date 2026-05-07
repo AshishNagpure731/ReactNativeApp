@@ -10,18 +10,29 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { DrawerLayoutAndroid } from "react-native-gesture-handler";
+// import { DrawerLayoutAndroid } from "react-native-gesture-handler";
 import DrawerView from "./DrawerView";
 import { useDispatch, useSelector } from "react-redux";
 import { CallGetAllProductApi } from "../fetures/AllApiCall";
+import { useWindowDimensions } from 'react-native';
 
 export default function AllProduct({ navigation }) {
   const dispatch = useDispatch();
+  const { height, width, scale, fontScale } = useWindowDimensions();
 
   const data = useSelector((e) => {
+    // console.log(e.list.data[0].category)
     return e.list.data;
   });
+  
   const drawer = useRef(null);
+  const [DrawerStatus, setDrawerStatus] = useState(false)
+  const OpentheDrawer =()=>{
+    console.log("Clicked on OpentheDrawer method ")
+    navigation.openDrawer()
+    setDrawerStatus(true) //and comment out this line if you want below line work
+    // drawer.current.openDrawer() --> have to uncomment if you want to show drawer
+  }
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -47,12 +58,14 @@ export default function AllProduct({ navigation }) {
     } else if (category === "All Product") {
       dispatch(CallGetAllProductApi());
     } else if (category === "Add Product") {
-      navigation.navigate("AddProduct");
+      navigation.openDrawer();
     }
     drawer.current.closeDrawer();
   };
   return (
-    <DrawerLayoutAndroid
+    <>
+ 
+    {/* <DrawerLayoutAndroid
       ref={drawer}
       drawerWidth={300}
       drawerPosition="right"
@@ -60,7 +73,7 @@ export default function AllProduct({ navigation }) {
         // viewDrawer
         <DrawerView onClose={closeDrawer} />
       )}
-    >
+    > */}
       <View style={{ marginTop: 50 }}>
         <View
           style={{
@@ -91,7 +104,9 @@ export default function AllProduct({ navigation }) {
             >
               Products
             </Text>
-            <TouchableOpacity onPress={() => drawer.current.openDrawer()}>
+            <TouchableOpacity onPress={OpentheDrawer //() => drawer.current.openDrawer()
+            }>
+           
               <Image
                 source={require("../../assets/drawer.png")}
                 style={{
@@ -176,7 +191,9 @@ export default function AllProduct({ navigation }) {
           </View>
         </ScrollView>
       </View>
-    </DrawerLayoutAndroid>
+    {/* </DrawerLayoutAndroid> */}
+
+    </>
   );
 }
 

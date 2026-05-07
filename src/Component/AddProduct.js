@@ -1,7 +1,7 @@
 import { View, Text, Image, Button } from "react-native";
 import React, { useLayoutEffect, useRef, useState } from "react";
 import {
-  DrawerLayoutAndroid,
+  // DrawerLayoutAndroid,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -11,22 +11,22 @@ import DrawerView from "./DrawerView";
 import { useDispatch } from "react-redux";
 import { CallGetAllProductApi } from "../fetures/AllApiCall";
 
-const AddProduct = ({ navigation }) => {
+const AddProduct = ({ navigation }) => { //
   const dispatch = useDispatch();
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, [navigation]);
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerShown: false,
+  //   });
+  // }, [navigation]);
 
   const [price, setprice] = useState("");
   const [title, settitle] = useState("");
   const [desc, setdesc] = useState("");
   const [image, setimage] = useState("");
   const [category, setcategory] = useState("");
-  const drawer = useRef(null);
+  // const drawer = useRef(null);
 
-  const addtheProduct = ({ navigation }) => {
+  const addtheProduct = () => {
     fetch("https://fakestoreapi.com/products", {
       method: "POST",
       body: JSON.stringify({
@@ -44,6 +44,8 @@ const AddProduct = ({ navigation }) => {
           alert("your product is added");
         }
       });
+
+      navigation.navigate("MainDrawer");
   };
   const closeDrawer = (category) => {
     if (category === "Men Clothing") {
@@ -68,19 +70,20 @@ const AddProduct = ({ navigation }) => {
     drawer.current.closeDrawer();
   };
   return (
-    <DrawerLayoutAndroid
-      ref={drawer}
-      drawerWidth={300}
-      drawerPosition="right"
-      renderNavigationView={() => (
-        // viewDrawer
-        <DrawerView onClose={closeDrawer} />
-      )}
-      style={{ marginTop: 60 }}
+    <View
+      // ref={drawer}
+      // drawerWidth={300}
+      // drawerPosition="right"
+      // renderNavigationView={() => (
+      //   // viewDrawer
+      //   <DrawerView onClose={closeDrawer} />
+      // )}
+      style={{ flex:1 }}
     >
-      <View
+    
+      {/* <View
         style={{
-          height: 40,
+          // height: 50,
           backgroundColor: "white",
 
           backgroundColor: "#f7ca4d",
@@ -105,9 +108,9 @@ const AddProduct = ({ navigation }) => {
               color: "#383838",
             }}
           >
-            Products
+           Add Product
           </Text>
-          <TouchableOpacity onPress={() => drawer.current.openDrawer()}>
+          <TouchableOpacity onPress={() => navigation.getParent()?.openDrawer()}>
             <Image
               source={require("../../assets/drawer.png")}
               style={{
@@ -119,9 +122,11 @@ const AddProduct = ({ navigation }) => {
             />
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
 
-      <ScrollView style={{ backgroundColor: "#d6d6d6" }}>
+      <ScrollView style={{ backgroundColor: "#f2efef" ,
+      // borderWidth:'10',borderColor:'red'
+      }}>
         <View>
           <View style={{ margin: 15 }}>
             <TouchableOpacity
@@ -177,7 +182,7 @@ const AddProduct = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </DrawerLayoutAndroid>
+      </View>
   );
 };
 
