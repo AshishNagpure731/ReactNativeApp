@@ -73,7 +73,7 @@ export default function UserAuth({ navigation }) {
           onPress={() => {
             login();
             data === undefined
-              ? alert("Incorrect Username Or Password")
+              ? navigation.navigate("MainDrawer")//alert("Incorrect Username Or Password")
               : navigation.navigate("MainDrawer");
           }}
         />

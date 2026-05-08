@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { getAllProducts, getUserAuthCall } from "../fetures/AllApiCall";
+import { getAllProducts, getUserAuthCall,CallGetProductById } from "../fetures/AllApiCall";
 
 const rootReducer = {
   app: getUserAuthCall.reducer,
   list: getAllProducts.reducer,
+  productId:CallGetProductById.reducer
 };
 
 export const store = configureStore({
