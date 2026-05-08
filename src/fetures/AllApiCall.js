@@ -39,6 +39,50 @@ export const getUserAuthCall = createSlice({
   }
 });
 
+export const callParticularProductDetialApi = createAsyncThunk(
+  "GetProductById",
+  async (getById, { rejectWithValue }) => {
+    if (typeof getById !== "number") {
+      console.log("Invalid ID:", getById);
+      return rejectWithValue("Invalid ID");
+    }
+
+    try {
+      const response = await fetch(
+        `https://fakestoreapi.com/products/${getById}`
+      );
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const CallGetProductById = createSlice({
+  name: "GetProductById",
+  initialState: {
+    data: null,
+    isLoading: false,
+    error: null,
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(callParticularProductDetialApi.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(callParticularProductDetialApi.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(callParticularProductDetialApi.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || action.error.message;
+      });
+  },
+});
+
 export const CallGetAllProductApi = createAsyncThunk(
   "AllProduct",
   async (e) => {
@@ -72,6 +116,8 @@ export const CallGetAllProductApi = createAsyncThunk(
     // return result;
   }
 );
+
+
 export const getAllProducts = createSlice({
   name: "AllProduct",
   initialState: {

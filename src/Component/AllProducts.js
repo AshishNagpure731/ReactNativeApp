@@ -13,8 +13,9 @@ import {
 // import { DrawerLayoutAndroid } from "react-native-gesture-handler";
 import DrawerView from "./DrawerView";
 import { useDispatch, useSelector } from "react-redux";
-import { CallGetAllProductApi } from "../fetures/AllApiCall";
+import { CallGetAllProductApi, callParticularProductDetialApi } from "../fetures/AllApiCall";
 import { useWindowDimensions } from 'react-native';
+// import { clampRGBA } from "react-native-reanimated/lib/typescript/Colors";
 
 export default function AllProduct({ navigation }) {
   const dispatch = useDispatch();
@@ -27,6 +28,19 @@ export default function AllProduct({ navigation }) {
   
   const drawer = useRef(null);
   const [DrawerStatus, setDrawerStatus] = useState(false)
+  const [ProductWiseApiCall, setProductWiseApiCall] = useState()
+  useEffect(() => {
+    if(ProductWiseApiCall){
+      dispatch(callParticularProductDetialApi(ProductWiseApiCall))
+      navigation.navigate("ProductDetails")
+    }
+    return () => {
+    setProductWiseApiCall()
+  }
+
+  }, [ProductWiseApiCall])
+
+
   const OpentheDrawer =()=>{
     console.log("Clicked on OpentheDrawer method ")
     navigation.openDrawer()
@@ -124,7 +138,7 @@ export default function AllProduct({ navigation }) {
             {data ? (
               data.map((e) => {
                 return (
-                  <View
+                  <TouchableOpacity
                     style={{
                       display: "flex",
                       borderWidth: 1,
@@ -135,6 +149,10 @@ export default function AllProduct({ navigation }) {
                       height: 300,
                     }}
                     key={e.id}
+                    onPress={
+                      ()=>setProductWiseApiCall(e.id)
+                      // dispatch(callParticularProductDetialApi(e.id)) 
+                    }
                   >
                     <Image
                       source={{ uri: e.image }}
@@ -182,7 +200,7 @@ export default function AllProduct({ navigation }) {
                       title="Open drawer"
                       onPress={() => drawer.current.openDrawer()}
                     /> */}
-                  </View>
+                  </TouchableOpacity>
                 );
               })
             ) : (
