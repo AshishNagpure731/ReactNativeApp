@@ -9,6 +9,9 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
+import Footer from "./Footer";
+// import React from "react";
+import { Vibration } from "react-native";
 
 const ProductDetails = () => {
   const { width, height } = useWindowDimensions();
@@ -17,31 +20,51 @@ const ProductDetails = () => {
   const data = useSelector((e) => {
     return e.productId.data;
   });
+  const PATTERN = [50, 1000, 50];
   return (
-    <View style={{ flex: 1, margin: 6 }}>
+    <View style={{ flex: 1, marginTop: 6, marginLeft: 6, marginRight: 6 }}>
       {data ? (
         <>
           <View style={{ flex: 2, justifyContent: "space-evenly" }}>
             <Text style={{ fontWeight: "bold", fontSize: width * 0.045 }}>
               {data.title}
             </Text>
-            <Image
-              source={{ uri: data.image }}
-              style={{
-                width: "auto",
-                height: height * 0.3,
-                resizeMode: "center",
-                // borderWidth:2,
-                elevation: 5, // Android shadow
+            <TouchableOpacity>
+              <Image
+                source={{ uri: data.image }}
+                style={{
+                  width: "auto",
+                  height: height * 0.3,
+                  resizeMode: "center",
+                  // borderWidth:2,
+                  elevation: 5, // Android shadow
                   shadowColor: "#000", // IOS shadow
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.3,
                   shadowRadius: 4,
-              }}
-            />
+                }}
+              />
+            </TouchableOpacity>
           </View>
           <View style={{ flex: 2, justifyContent: "space-evenly" }}>
-            <Text style={{ fontSize: width * 0.09 }}>₹{data.price}</Text>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={{ fontSize: width * 0.09 }}>₹{data.price}</Text>
+              <Image
+                source={require("../../assets/heart.png")}
+                style={{
+                  width: 30,
+                  height: 30,
+                  resizeMode: "center",
+                  elevation: 5, // Android shadow
+                  shadowColor: "#000", // IOS shadow
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 4,
+                }}
+              />
+            </View>
             <Text>Rating: {data.rating.rate} Out of 5</Text>
             <Text style={{ fontSize: width * 0.045 }}>
               Category: {data.category}
@@ -71,7 +94,7 @@ const ProductDetails = () => {
                   shadowRadius: 4,
                 }}
                 activeOpacity={0.7}
-                onPress={() => {}}
+                onPress={() => {Vibration.vibrate(PATTERN)}}
               >
                 <Text
                   style={{
@@ -117,6 +140,7 @@ const ProductDetails = () => {
       ) : (
         <Text>Loading...</Text>
       )}
+      <Footer />
     </View>
   );
 };

@@ -15,6 +15,7 @@ import DrawerView from "./DrawerView";
 import { useDispatch, useSelector } from "react-redux";
 import { CallGetAllProductApi, callParticularProductDetialApi } from "../fetures/AllApiCall";
 import { useWindowDimensions } from 'react-native';
+import Footer from "./Footer";
 // import { clampRGBA } from "react-native-reanimated/lib/typescript/Colors";
 
 export default function AllProduct({ navigation }) {
@@ -88,7 +89,12 @@ export default function AllProduct({ navigation }) {
         <DrawerView onClose={closeDrawer} />
       )}
     > */}
-      <View style={{ marginTop: 50 }}>
+      <View style={{ marginTop: 50,flex:1,flexDirection:'column',justifyContent:'space-between',
+      elevation: 5, // Android shadow
+                          shadowColor: "#000", // IOS shadow
+                          shadowOffset: { width: 0, height: 2 },
+                          shadowOpacity: 0.25,
+                          shadowRadius: 4,}}>
         <View
           style={{
             height: 40,
@@ -114,6 +120,11 @@ export default function AllProduct({ navigation }) {
                 fontSize: 33,
                 // fontFamily: "Roboto",
                 color: "#383838",
+                 elevation: 5, // Android shadow
+                  shadowColor: "#000", // IOS shadow
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 1,
               }}
             >
               Products
@@ -128,12 +139,17 @@ export default function AllProduct({ navigation }) {
                   height: 50,
                   marginLeft: 4,
                   alignSelf: "flex-end",
+                  elevation: 5, // Android shadow
+                  shadowColor: "#000", // IOS shadow
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 1,
                 }}
               />
             </TouchableOpacity>
           </View>
         </View>
-        <ScrollView>
+                        <ScrollView>
           <View style={styles.container}>
             {data ? (
               data.map((e) => {
@@ -141,12 +157,18 @@ export default function AllProduct({ navigation }) {
                   <TouchableOpacity
                     style={{
                       display: "flex",
-                      borderWidth: 1,
+                      borderWidth: 0.5,
                       borderColor: "#e6e6e6",
                       // margin: 4,
                       flexDirection: "row",
                       alignItems: "center",
                       height: 300,
+                      margin:2,
+                      elevation: 3, // Android shadow
+                  shadowColor: "#000", // IOS shadow
+                  shadowOffset: { width: 0, height: 1 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 0.5,
                     }}
                     key={e.id}
                     onPress={
@@ -162,7 +184,7 @@ export default function AllProduct({ navigation }) {
                       style={{
                         marginLeft: 8,
                         flex: 1,
-                        marginTop: 2,
+                        // marginTop: 2,
                         height: 300,
                         backgroundColor: "#f1f1f1",
                         // margin: ,
@@ -208,6 +230,9 @@ export default function AllProduct({ navigation }) {
             )}
           </View>
         </ScrollView>
+        {/* <View > */}
+        <Footer/>
+        {/* </View> */}
       </View>
     {/* </DrawerLayoutAndroid> */}
 

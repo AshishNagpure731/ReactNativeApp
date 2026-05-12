@@ -7,6 +7,7 @@ import AllProduct from "./src/Component/AllProducts";
 import AddProduct from "./src/Component/AddProduct";
 import Drawer from "./src/Component/Drawer";
 import ProductDetails from "./src/Component/ProductDetails";
+import Profile from "./src/Component/Profile";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ export default function AllApp() {
         <Stack.Screen name="AllProduct" component={AllProduct} />
         <Stack.Screen options={{ headerShown: true }} name="AddProduct" component={AddProduct} />
         <Stack.Screen options={{ headerShown: true }} name="ProductDetails" component={ProductDetails} />
+        <Stack.Screen name="Profile" component={Profile}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
